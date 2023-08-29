@@ -12,5 +12,12 @@ final class UIPhotosController: UIBaseViewController<PhotosViewModel> {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .gray
+        
+        PhotoService().searchPhotos(params: SearchParams(query: "Dubia"))
+        .subscribe(onNext: {[weak self] event in
+            print(event.results?.items.count, "items's count")
+        }, onError : {[weak self] error in
+           print(error)
+        }).disposed(by: disposeBag)
     }
 }

@@ -34,6 +34,11 @@
 		04F927C62A9DF14700CC3F52 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F927C52A9DF14700CC3F52 /* Endpoint.swift */; };
 		04F927C82A9DFE3400CC3F52 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F927C72A9DFE3400CC3F52 /* String.swift */; };
 		04F927CA2A9DFE5400CC3F52 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F927C92A9DFE5400CC3F52 /* Dictionary.swift */; };
+		04F927CF2A9E00B200CC3F52 /* PhotosEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F927CE2A9E00B200CC3F52 /* PhotosEndpoint.swift */; };
+		04F927D12A9E012000CC3F52 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F927D02A9E012000CC3F52 /* PhotoService.swift */; };
+		04F927D62A9E017C00CC3F52 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F927D52A9E017C00CC3F52 /* Photo.swift */; };
+		04F927D82A9E01D100CC3F52 /* SearchParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F927D72A9E01D100CC3F52 /* SearchParams.swift */; };
+		04F927DA2A9E022700CC3F52 /* SearchPhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F927D92A9E022700CC3F52 /* SearchPhotoResponse.swift */; };
 		5273B898FC55748AB913F5E9 /* Pods_BestShot_BestShotUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A0162DA61D2632C9629DC7 /* Pods_BestShot_BestShotUITests.framework */; };
 		BBC173631E7EE91969B72841 /* Pods_BestShot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5F301D378261619B9B70F2 /* Pods_BestShot.framework */; };
 		C0F67B0AAFC5D9C6A8591E57 /* Pods_BestShotTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60381C769022DA38BF55FF11 /* Pods_BestShotTests.framework */; };
@@ -88,6 +93,11 @@
 		04F927C52A9DF14700CC3F52 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		04F927C72A9DFE3400CC3F52 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		04F927C92A9DFE5400CC3F52 /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
+		04F927CE2A9E00B200CC3F52 /* PhotosEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosEndpoint.swift; sourceTree = "<group>"; };
+		04F927D02A9E012000CC3F52 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
+		04F927D52A9E017C00CC3F52 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		04F927D72A9E01D100CC3F52 /* SearchParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchParams.swift; sourceTree = "<group>"; };
+		04F927D92A9E022700CC3F52 /* SearchPhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotoResponse.swift; sourceTree = "<group>"; };
 		20E87EA572F951839133863E /* Pods-BestShotTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BestShotTests.debug.xcconfig"; path = "Target Support Files/Pods-BestShotTests/Pods-BestShotTests.debug.xcconfig"; sourceTree = "<group>"; };
 		23A0162DA61D2632C9629DC7 /* Pods_BestShot_BestShotUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BestShot_BestShotUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C5F301D378261619B9B70F2 /* Pods_BestShot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BestShot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -293,6 +303,8 @@
 		04F927BA2A9DEF7B00CC3F52 /* NetworkManager */ = {
 			isa = PBXGroup;
 			children = (
+				04F927D42A9E016500CC3F52 /* Models */,
+				04F927CB2A9E008200CC3F52 /* Services */,
 				04F927BC2A9DEF9900CC3F52 /* Enums */,
 				04F927BB2A9DEF9400CC3F52 /* Base */,
 			);
@@ -316,6 +328,33 @@
 				04F927BF2A9DF01100CC3F52 /* NetworkError.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		04F927CB2A9E008200CC3F52 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				04F927CC2A9E009300CC3F52 /* Photo */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		04F927CC2A9E009300CC3F52 /* Photo */ = {
+			isa = PBXGroup;
+			children = (
+				04F927CE2A9E00B200CC3F52 /* PhotosEndpoint.swift */,
+				04F927D02A9E012000CC3F52 /* PhotoService.swift */,
+			);
+			path = Photo;
+			sourceTree = "<group>";
+		};
+		04F927D42A9E016500CC3F52 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				04F927D52A9E017C00CC3F52 /* Photo.swift */,
+				04F927D72A9E01D100CC3F52 /* SearchParams.swift */,
+				04F927D92A9E022700CC3F52 /* SearchPhotoResponse.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		62C0E991A696759C9D5997CF /* Pods */ = {
@@ -583,21 +622,26 @@
 				04F927C02A9DF01100CC3F52 /* NetworkError.swift in Sources */,
 				04F927A42A9DE39C00CC3F52 /* UISplashController.swift in Sources */,
 				04F927B32A9DEA2700CC3F52 /* ErrorDataView.swift in Sources */,
+				04F927DA2A9E022700CC3F52 /* SearchPhotoResponse.swift in Sources */,
 				04F9279F2A9DE0C700CC3F52 /* MainCoordinator.swift in Sources */,
 				04F927AC2A9DE74800CC3F52 /* UIPhotosController.swift in Sources */,
 				042357872A9DD9360021972B /* AppDelegate.swift in Sources */,
 				04F927B92A9DEAFC00CC3F52 /* PhotosViewModelProtocol.swift in Sources */,
+				04F927D12A9E012000CC3F52 /* PhotoService.swift in Sources */,
+				04F927D62A9E017C00CC3F52 /* Photo.swift in Sources */,
 				04F9279D2A9DE01F00CC3F52 /* Coordinator.swift in Sources */,
 				04F927B12A9DE9E200CC3F52 /* BaseViewModel.swift in Sources */,
 				04F927B72A9DEABD00CC3F52 /* PhotosViewModel.swift in Sources */,
 				04F927C22A9DF12300CC3F52 /* NetworkManagerProtocol.swift in Sources */,
 				042357892A9DD9360021972B /* SceneDelegate.swift in Sources */,
+				04F927D82A9E01D100CC3F52 /* SearchParams.swift in Sources */,
 				04F9279B2A9DDD3B00CC3F52 /* Constant.swift in Sources */,
 				04F927C62A9DF14700CC3F52 /* Endpoint.swift in Sources */,
 				04F927CA2A9DFE5400CC3F52 /* Dictionary.swift in Sources */,
 				04F927A62A9DE41700CC3F52 /* UIView.swift in Sources */,
 				04F927BE2A9DEFE000CC3F52 /* Methods.swift in Sources */,
 				04F927AF2A9DE9AA00CC3F52 /* UIBaseViewController.swift in Sources */,
+				04F927CF2A9E00B200CC3F52 /* PhotosEndpoint.swift in Sources */,
 				04F927C82A9DFE3400CC3F52 /* String.swift in Sources */,
 				04F927A22A9DE20100CC3F52 /* UINavigationController.swift in Sources */,
 				04F927A82A9DE56C00CC3F52 /* UIColor.swift in Sources */,
