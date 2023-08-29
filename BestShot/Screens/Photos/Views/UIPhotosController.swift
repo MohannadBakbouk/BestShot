@@ -36,9 +36,7 @@ final class UIPhotosController: UIBaseViewController<PhotosViewModel> {
         super.viewDidLoad()
         setupViews()
         viewModel.searchPhotos()
-        bindingCollectionViewDataSource()
-        bindingToSearchQuery()
-        bindingCollectionViewScrollingEvent()
+        bindingViewModel()
     }
     
     private func setupViews(){
@@ -62,13 +60,24 @@ final class UIPhotosController: UIBaseViewController<PhotosViewModel> {
         }
     }
     
-    func bindingCollectionViewDataSource(){
-         viewModel.photos
+    private func bindingViewModel(){
+        bindingPhotos()
+        bindingCollectionViewDataSource()
+        bindingToSearchQuery()
+        bindingCollectionViewScrollingEvent()
+        bindingHistorySearchTrigger()
+        bindingHistorySearchItemsToSearchView()
+    }
+    
+    private func bindingPhotos(){
+        viewModel.photos
         .filter{$0.count > 0}
         .subscribe(onNext: {[weak self] items in
            self?.collectionViewLayout.invalidateLayout()
         }).disposed(by: disposeBag)
-        
+    }
+    
+    private func bindingCollectionViewDataSource(){
         viewModel.photos
         .bind(to: collectionView.rx.items){(collection, index , model) in
             let target = IndexPath(row: index, section: 0)
@@ -78,15 +87,27 @@ final class UIPhotosController: UIBaseViewController<PhotosViewModel> {
         }.disposed(by: disposeBag)
     }
     
-    func bindingToSearchQuery(){
+    private func bindingToSearchQuery(){
         searchView.searchQuery
        .bind(to: viewModel.searchQuery)
        .disposed(by: disposeBag)
     }
     
-    func bindingCollectionViewScrollingEvent(){
+    private func bindingCollectionViewScrollingEvent(){
          collectionView.rx.reachedBottom
         .bind(to: viewModel.reachedBottomTrigger)
+        .disposed(by: disposeBag)
+    }
+    
+    private func bindingHistorySearchTrigger(){
+         searchView.loadHistorySearchTrigger
+        .bind(to: viewModel.loadHistorySearchTrigger)
+        .disposed(by: disposeBag)
+    }
+    
+    private func bindingHistorySearchItemsToSearchView(){
+        viewModel.historySearchItems
+        .bind(to: searchView.items)
         .disposed(by: disposeBag)
     }
 }

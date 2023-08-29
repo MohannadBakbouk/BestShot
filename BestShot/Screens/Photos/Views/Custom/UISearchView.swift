@@ -95,7 +95,8 @@ final class UISearchView: UIView, UISearchViewProtocol {
         
         searchBarView.rx.textDidEndEditing
         .subscribe(onNext: {[weak self] _ in
-            self?.tableView.removeFromSuperview()
+                self?.tableView.removeFromSuperview()
+            _ = self?.tableView.constraints.map{$0.isActive = false}
         }).disposed(by: disposeBag)
     }
     
@@ -108,6 +109,7 @@ final class UISearchView: UIView, UISearchViewProtocol {
     }
     
     private func showHistoryTableview(){
+       
         superview?.addSubview(tableView)
         tableView.separatorStyle = .none
         let height = min((5 * historyItemHeight), (CGFloat(items.value.count) * historyItemHeight))
@@ -125,6 +127,7 @@ final class UISearchView: UIView, UISearchViewProtocol {
        .subscribe(onNext : {[weak self] selectedItem in
            self?.searchBarView.endEditing(true)
            self?.searchBarView.text = selectedItem
+           self?.searchQuery.onNext(selectedItem)
        }).disposed(by: disposeBag)
     }
 }

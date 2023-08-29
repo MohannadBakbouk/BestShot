@@ -16,9 +16,11 @@ final class PhotosViewModel: PhotosViewModelProtocol{
     var isLoading: PublishSubject<Bool>
     var error: BehaviorSubject<ErrorDataView?>
     var photos: BehaviorRelay<[PhotoViewData]>
+    var historySearchItems: BehaviorRelay<[String]>
     //Inputs events
     var searchQuery: PublishSubject<String?>
     var reachedBottomTrigger: PublishSubject<Void>
+    var loadHistorySearchTrigger: PublishSubject<Void>
     //Internal events
     var fetchedPhotos: BehaviorRelay<[Photo]>
     var isLoadingMore: BehaviorRelay<Bool>
@@ -32,15 +34,17 @@ final class PhotosViewModel: PhotosViewModelProtocol{
         self.isLoading = PublishSubject()
         self.error = BehaviorSubject(value: nil)
         self.photos = BehaviorRelay(value: [])
+        self.historySearchItems = BehaviorRelay(value: [])
         self.fetchedPhotos = BehaviorRelay(value: [])
         self.searchQuery = PublishSubject()
         self.reachedBottomTrigger = PublishSubject()
+        self.loadHistorySearchTrigger = PublishSubject()
         self.isLoadingMore = BehaviorRelay(value: false)
         self.cacheManager.setup(completion: nil)
         subscribingToFetchedPhotos()
         subscribingToSearchQuery()
         subscribingToReachedBottomTrigger()
-       
+        subscribingToHistorySearchTrigger()
     }
 
     func searchPhotos(){
@@ -104,6 +108,7 @@ final class PhotosViewModel: PhotosViewModelProtocol{
         .subscribe(onNext:{[weak self] text in
             self?.searchParams = SearchParams(query: text)
             self?.searchPhotos()
+            self?.cacheManager.add(info: QueryObject(text: text), entity: Query.self)
         }).disposed(by: disposeBag)
     }
     
@@ -118,6 +123,14 @@ final class PhotosViewModel: PhotosViewModelProtocol{
             self?.isLoadingMore.accept(true)
             self?.searchParams.page += 1
             self?.searchPhotos()
+        }).disposed(by: disposeBag)
+    }
+    
+    private func subscribingToHistorySearchTrigger(){
+        loadHistorySearchTrigger
+        .subscribe(onNext:{[weak self]_ in
+            guard let items = self?.cacheManager.fetchAll(entity: Query.self) else {return}
+            self?.historySearchItems.accept(items.compactMap{$0.text})
         }).disposed(by: disposeBag)
     }
 }
