@@ -37,6 +37,7 @@ final class UIPhotosController: UIBaseViewController<PhotosViewModel> {
         setupViews()
         viewModel.searchPhotos()
         bindingCollectionViewDataSource()
+        bindingToSearchQuery()
     }
     
     private func setupViews(){
@@ -74,6 +75,12 @@ final class UIPhotosController: UIBaseViewController<PhotosViewModel> {
             cell?.configure(with: model)
             return cell ?? UICollectionViewCell()
         }.disposed(by: disposeBag)
+    }
+    
+    func bindingToSearchQuery(){
+        searchView.searchQuery
+       .bind(to: viewModel.searchQuery)
+       .disposed(by: disposeBag)
     }
 }
 

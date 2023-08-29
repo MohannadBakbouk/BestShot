@@ -16,6 +16,7 @@ final class PhotosViewModel: PhotosViewModelProtocol{
     var error: BehaviorSubject<ErrorDataView?>
     var photos: BehaviorRelay<[PhotoViewData]>
     var fetchedPhotos: BehaviorRelay<[Photo]>
+    var searchQuery: PublishSubject<String?>
     let disposeBag: DisposeBag
     
     init(service: PhotoServiceProtocol) {
@@ -26,8 +27,9 @@ final class PhotosViewModel: PhotosViewModelProtocol{
         self.error = BehaviorSubject(value: nil)
         self.photos = BehaviorRelay(value: [])
         self.fetchedPhotos = BehaviorRelay(value: [])
+        self.searchQuery = PublishSubject()
         subscribingToFetchedPhotos()
-        
+        subscribingToSearchQuery()
     }
 
     func searchPhotos(){
@@ -51,8 +53,9 @@ final class PhotosViewModel: PhotosViewModelProtocol{
         
         group.notify(queue: DispatchQueue.main){[weak self] in
             guard let self = self else {return}
-            let newItems = self.fetchedPhotos.value
-            self.photos.accept(self.photos.value + newItems.map{PhotoViewData(info: $0)})
+            let newItems = self.fetchedPhotos.value.map{PhotoViewData(info: $0)}
+            let emittedItems = self.searchParams.page > 1 ? (self.photos.value + newItems) : newItems
+            self.photos.accept(emittedItems)
         }
     }
     
@@ -79,6 +82,15 @@ final class PhotosViewModel: PhotosViewModelProtocol{
         .filter{$0.count > 0}
         .subscribe(onNext:{[weak self]_ in
             self?.processFetchedPhotos()
+        }).disposed(by: disposeBag)
+    }
+    
+    private func subscribingToSearchQuery(){
+        searchQuery
+        .compactMap{$0}
+        .subscribe(onNext:{[weak self] text in
+            self?.searchParams = SearchParams(query: text)
+            self?.searchPhotos()
         }).disposed(by: disposeBag)
     }
 }
