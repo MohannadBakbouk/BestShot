@@ -10,6 +10,7 @@ import RxSwift
 
 protocol PhotoServiceProtocol {
     func searchPhotos(params: SearchParams) -> Observable<SearchPhotosResponse>
+    func fetchImage(url : URL) -> Observable<Data>
 }
 
 final class PhotoService: PhotoServiceProtocol{
@@ -21,5 +22,9 @@ final class PhotoService: PhotoServiceProtocol{
     
     func searchPhotos(params: SearchParams) -> Observable<SearchPhotosResponse> {
         return networkManager.request(endpoint: PhotosEndpoint.searchPhotos(info: params), method: .Get)
+    }
+    
+    func fetchImage(url: URL) -> Observable<Data> {
+        return networkManager.request(endpoint: PhotosEndpoint.fetchImage(url: url), method: .Get)
     }
 }

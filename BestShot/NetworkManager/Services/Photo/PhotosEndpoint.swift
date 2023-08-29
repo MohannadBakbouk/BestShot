@@ -9,10 +9,12 @@ import Foundation
 
 enum PhotosEndpoint: Endpoint{
     case searchPhotos(info: SearchParams)
+    case fetchImage(url: URL)
     
     var action: String {
         switch self {
          case .searchPhotos: return "flickr.photos.search"
+         case .fetchImage: return ""
       }
     }
     
@@ -22,18 +24,21 @@ enum PhotosEndpoint: Endpoint{
             var params: JSON = ["method": action]
             _ = [authParams, searchParams.asJson].map{params.merge(dict: $0)}
             return params
+          case .fetchImage: return [:]
         }
     }
     
     var method: Method {
         switch self {
           case .searchPhotos: return .Get
+          case .fetchImage:   return .Get
         }
     }
     
     var path: String{
         switch self {
           case .searchPhotos: return ApiInfo.baseUrl
+          case .fetchImage(let url): return url.absoluteString
         }
     }
 }

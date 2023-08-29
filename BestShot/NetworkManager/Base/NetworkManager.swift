@@ -28,6 +28,12 @@ final class NetworkManager: NetworkManagerProtocol {
                     let error = NetworkError.convert((response as? HTTPURLResponse)?.statusCode) ?? NetworkError.convert(error)
                     return observer.onError(error)
                 }
+                /* I did use this function also to fetch the photo's Data
+                 so just return it when the T's type is data */
+                guard T.self != Data.self else {
+                    observer.onNext(data as! T)
+                    return observer.onCompleted()
+                }
                 
                 guard let info = try? JSONDecoder().decode(T.self, from: data) else {
                     return  observer.onError(NetworkError.parse)

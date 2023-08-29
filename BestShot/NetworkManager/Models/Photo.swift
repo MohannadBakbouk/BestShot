@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import class UIKit.UIImage
 
-struct Photo : Codable {
+class Photo : Codable {
     let id : String
     let owner : String
     let secret : String
@@ -17,6 +18,7 @@ struct Photo : Codable {
     let ispublic : Int
     let isfriend : Int
     let isfamily : Int
+    var image: UIImage?
     
     enum CodingKeys: String, CodingKey{
         case id
