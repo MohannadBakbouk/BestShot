@@ -7,11 +7,10 @@
 
 import UIKit
 
-class UIPhotosController: UIViewController {
+final class UIPhotosController: UIBaseViewController<PhotosViewModel> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = .gray
     }
 }
