@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 enum ApiInfo {
     static let content = "application/json; charset=utf-8"
@@ -27,3 +28,12 @@ enum Images {
     static let clock = "clock"
 }
 
+enum DefaultSettings   {
+    static let modelName = "QueryModel"
+    static let modelBundleIdentifier = "com.mohannad.BestShot"
+}
+
+enum StorageType  {
+    static let  memory = NSInMemoryStoreType
+    static let  disk = NSSQLiteStoreType
+}

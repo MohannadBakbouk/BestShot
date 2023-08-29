@@ -10,6 +10,7 @@ import RxCocoa
 
 final class PhotosViewModel: PhotosViewModelProtocol{
     private let service: PhotoServiceProtocol
+    private let cacheManager: CacheManagerProtocol
     private var searchParams : SearchParams
     //Output events
     var isLoading: PublishSubject<Bool>
@@ -23,8 +24,9 @@ final class PhotosViewModel: PhotosViewModelProtocol{
     var isLoadingMore: BehaviorRelay<Bool>
     let disposeBag: DisposeBag
     
-    init(service: PhotoServiceProtocol) {
+    init(service: PhotoServiceProtocol, cacheManager: CacheManagerProtocol) {
         self.service = service
+        self.cacheManager = cacheManager
         self.searchParams = SearchParams(query: "Netherlands")
         self.disposeBag = DisposeBag()
         self.isLoading = PublishSubject()
@@ -34,9 +36,11 @@ final class PhotosViewModel: PhotosViewModelProtocol{
         self.searchQuery = PublishSubject()
         self.reachedBottomTrigger = PublishSubject()
         self.isLoadingMore = BehaviorRelay(value: false)
+        self.cacheManager.setup(completion: nil)
         subscribingToFetchedPhotos()
         subscribingToSearchQuery()
         subscribingToReachedBottomTrigger()
+       
     }
 
     func searchPhotos(){

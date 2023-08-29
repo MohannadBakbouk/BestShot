@@ -47,6 +47,12 @@
 		04F927E92A9E401F00CC3F52 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F927E82A9E401F00CC3F52 /* UITableView.swift */; };
 		04F927EB2A9E406800CC3F52 /* UISearchHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F927EA2A9E406800CC3F52 /* UISearchHistoryCell.swift */; };
 		04F927ED2A9E50DA00CC3F52 /* Reactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F927EC2A9E50DA00CC3F52 /* Reactive.swift */; };
+		04F927F02A9E5AAC00CC3F52 /* CacheManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F927EF2A9E5AAC00CC3F52 /* CacheManagerProtocol.swift */; };
+		04F927F22A9E5ABC00CC3F52 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F927F12A9E5ABC00CC3F52 /* CacheManager.swift */; };
+		04F927F52A9E7EBB00CC3F52 /* NSManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F927F42A9E7EBB00CC3F52 /* NSManagedObject.swift */; };
+		04F927F82A9E7EFC00CC3F52 /* QueryModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 04F927F62A9E7EFC00CC3F52 /* QueryModel.xcdatamodeld */; };
+		04F927FA2A9E7F4F00CC3F52 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F927F92A9E7F4F00CC3F52 /* Query.swift */; };
+		04F927FC2A9E7FDE00CC3F52 /* QueryObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F927FB2A9E7FDE00CC3F52 /* QueryObject.swift */; };
 		5273B898FC55748AB913F5E9 /* Pods_BestShot_BestShotUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A0162DA61D2632C9629DC7 /* Pods_BestShot_BestShotUITests.framework */; };
 		BBC173631E7EE91969B72841 /* Pods_BestShot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5F301D378261619B9B70F2 /* Pods_BestShot.framework */; };
 		C0F67B0AAFC5D9C6A8591E57 /* Pods_BestShotTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60381C769022DA38BF55FF11 /* Pods_BestShotTests.framework */; };
@@ -114,6 +120,12 @@
 		04F927E82A9E401F00CC3F52 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		04F927EA2A9E406800CC3F52 /* UISearchHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISearchHistoryCell.swift; sourceTree = "<group>"; };
 		04F927EC2A9E50DA00CC3F52 /* Reactive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reactive.swift; sourceTree = "<group>"; };
+		04F927EF2A9E5AAC00CC3F52 /* CacheManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManagerProtocol.swift; sourceTree = "<group>"; };
+		04F927F12A9E5ABC00CC3F52 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
+		04F927F42A9E7EBB00CC3F52 /* NSManagedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObject.swift; sourceTree = "<group>"; };
+		04F927F72A9E7EFC00CC3F52 /* QueryModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QueryModel.xcdatamodel; sourceTree = "<group>"; };
+		04F927F92A9E7F4F00CC3F52 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
+		04F927FB2A9E7FDE00CC3F52 /* QueryObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryObject.swift; sourceTree = "<group>"; };
 		20E87EA572F951839133863E /* Pods-BestShotTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BestShotTests.debug.xcconfig"; path = "Target Support Files/Pods-BestShotTests/Pods-BestShotTests.debug.xcconfig"; sourceTree = "<group>"; };
 		23A0162DA61D2632C9629DC7 /* Pods_BestShot_BestShotUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BestShot_BestShotUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C5F301D378261619B9B70F2 /* Pods_BestShot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BestShot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,6 +192,7 @@
 			children = (
 				04F927942A9DDBAE00CC3F52 /* Screens */,
 				04F927BA2A9DEF7B00CC3F52 /* NetworkManager */,
+				04F927EE2A9E5A9A00CC3F52 /* CacheManager */,
 				04F927952A9DDBFD00CC3F52 /* Utilities */,
 				04F927962A9DDC0B00CC3F52 /* Resources */,
 			);
@@ -207,8 +220,8 @@
 			isa = PBXGroup;
 			children = (
 				04F927AD2A9DE98F00CC3F52 /* Base */,
-				04F927982A9DDC7800CC3F52 /* Photos */,
 				04F927972A9DDC6900CC3F52 /* Splash */,
+				04F927982A9DDC7800CC3F52 /* Photos */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -403,6 +416,27 @@
 				04F927E62A9E378C00CC3F52 /* UISearchView.swift */,
 			);
 			path = Custom;
+			sourceTree = "<group>";
+		};
+		04F927EE2A9E5A9A00CC3F52 /* CacheManager */ = {
+			isa = PBXGroup;
+			children = (
+				04F927F32A9E7EA300CC3F52 /* Model */,
+				04F927EF2A9E5AAC00CC3F52 /* CacheManagerProtocol.swift */,
+				04F927F12A9E5ABC00CC3F52 /* CacheManager.swift */,
+				04F927F62A9E7EFC00CC3F52 /* QueryModel.xcdatamodeld */,
+			);
+			path = CacheManager;
+			sourceTree = "<group>";
+		};
+		04F927F32A9E7EA300CC3F52 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				04F927F42A9E7EBB00CC3F52 /* NSManagedObject.swift */,
+				04F927F92A9E7F4F00CC3F52 /* Query.swift */,
+				04F927FB2A9E7FDE00CC3F52 /* QueryObject.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		62C0E991A696759C9D5997CF /* Pods */ = {
@@ -667,23 +701,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				04F927C42A9DF13500CC3F52 /* NetworkManager.swift in Sources */,
+				04F927F82A9E7EFC00CC3F52 /* QueryModel.xcdatamodeld in Sources */,
 				04F927C02A9DF01100CC3F52 /* NetworkError.swift in Sources */,
 				04F927A42A9DE39C00CC3F52 /* UISplashController.swift in Sources */,
 				04F927E42A9E1CCB00CC3F52 /* UIDynamicCollectionLayout.swift in Sources */,
 				04F927EB2A9E406800CC3F52 /* UISearchHistoryCell.swift in Sources */,
 				04F927B32A9DEA2700CC3F52 /* ErrorDataView.swift in Sources */,
+				04F927FC2A9E7FDE00CC3F52 /* QueryObject.swift in Sources */,
 				04F927DA2A9E022700CC3F52 /* SearchPhotoResponse.swift in Sources */,
 				04F927DD2A9E08F300CC3F52 /* PhotoViewData.swift in Sources */,
 				04F9279F2A9DE0C700CC3F52 /* MainCoordinator.swift in Sources */,
 				04F927AC2A9DE74800CC3F52 /* UIPhotosController.swift in Sources */,
 				042357872A9DD9360021972B /* AppDelegate.swift in Sources */,
+				04F927F52A9E7EBB00CC3F52 /* NSManagedObject.swift in Sources */,
 				04F927B92A9DEAFC00CC3F52 /* PhotosViewModelProtocol.swift in Sources */,
 				04F927E22A9E0CA900CC3F52 /* UIPhotoCell.swift in Sources */,
 				04F927D12A9E012000CC3F52 /* PhotoService.swift in Sources */,
 				04F927D62A9E017C00CC3F52 /* Photo.swift in Sources */,
 				04F9279D2A9DE01F00CC3F52 /* Coordinator.swift in Sources */,
+				04F927F22A9E5ABC00CC3F52 /* CacheManager.swift in Sources */,
 				04F927B12A9DE9E200CC3F52 /* BaseViewModel.swift in Sources */,
+				04F927FA2A9E7F4F00CC3F52 /* Query.swift in Sources */,
 				04F927DF2A9E0BAC00CC3F52 /* UICollectionView.swift in Sources */,
+				04F927F02A9E5AAC00CC3F52 /* CacheManagerProtocol.swift in Sources */,
 				04F927B72A9DEABD00CC3F52 /* PhotosViewModel.swift in Sources */,
 				04F927ED2A9E50DA00CC3F52 /* Reactive.swift in Sources */,
 				04F927C22A9DF12300CC3F52 /* NetworkManagerProtocol.swift in Sources */,
@@ -1034,6 +1074,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		04F927F62A9E7EFC00CC3F52 /* QueryModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				04F927F72A9E7EFC00CC3F52 /* QueryModel.xcdatamodel */,
+			);
+			currentVersion = 04F927F72A9E7EFC00CC3F52 /* QueryModel.xcdatamodel */;
+			path = QueryModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0423577B2A9DD9360021972B /* Project object */;
 }
