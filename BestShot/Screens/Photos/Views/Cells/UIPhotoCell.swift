@@ -46,4 +46,3 @@ final class UIPhotoCell: UICollectionViewCell {
         photoView.kf.setImage(with: url)
     }
 }
-

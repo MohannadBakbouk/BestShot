@@ -22,12 +22,9 @@ final class UIPhotosController: UIBaseViewController<PhotosViewModel> {
         return collection
     }()
     
-    private lazy var collectionViewLayout : UICollectionViewFlowLayout = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        layout.minimumLineSpacing = padding
-        layout.minimumInteritemSpacing = padding
+    private lazy var collectionViewLayout : UIDynamicCollectionLayout = {
+        let layout = UIDynamicCollectionLayout()
+        layout.delegate = self
         return layout
     }()
     
@@ -53,19 +50,6 @@ final class UIPhotosController: UIBaseViewController<PhotosViewModel> {
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        _ = collectionView.frame == .zero ? collectionView.layoutIfNeeded() : ()
-        setupCollectionCellSize()
-    }
-
-    private func setupCollectionCellSize(){
-        let sectionInset = collectionViewLayout.sectionInset
-        let width = (collectionView.frame.width ) - (sectionInset.left + sectionInset.right)
-        let height = (collectionView.frame.height) - (sectionInset.top + sectionInset.bottom)
-        collectionViewLayout.itemSize = CGSize(width: (width - padding) / 2 , height: (height - padding) / 2.5)
-    }
-    
     func bindingCollectionViewDataSource(){
         viewModel.photos
         .bind(to: collectionView.rx.items){(collection, index , model) in
@@ -74,5 +58,14 @@ final class UIPhotosController: UIBaseViewController<PhotosViewModel> {
             cell?.configure(with: model)
             return cell ?? UICollectionViewCell()
         }.disposed(by: disposeBag)
+    }
+}
+
+extension UIPhotosController: UIDynamicCollectionLayoutDelegate{
+    func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, cellWidth: CGFloat) -> CGFloat {
+        let sourceImage = viewModel.photos.value[indexPath.row]
+        let scaleFactor = cellWidth / sourceImage.width
+        let imgHeight = sourceImage.height * scaleFactor
+        return (imgHeight + padding)
     }
 }

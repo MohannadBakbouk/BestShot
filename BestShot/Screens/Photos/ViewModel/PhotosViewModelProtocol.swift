@@ -9,5 +9,6 @@ import RxCocoa
 
 protocol PhotosViewModelProtocol: BaseViewModelProtocol{
     var photos: BehaviorRelay<[PhotoViewData]>{get}
+    var fetchedPhotos: BehaviorRelay<[Photo]>{get}
     func searchPhotos()
 }
