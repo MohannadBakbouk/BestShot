@@ -13,6 +13,10 @@ final class UIPhotosController: UIBaseViewController<PhotosViewModel> {
     
     private let padding: CGFloat = 10.0
     
+    private let searchView: UISearchViewProtocol = {
+        return UISearchView()
+    }()
+    
     private lazy var collectionView : UICollectionView = {
         let collection = UICollectionView(frame: .zero , collectionViewLayout: collectionViewLayout)
         collection.allowsMultipleSelection = false
@@ -37,20 +41,32 @@ final class UIPhotosController: UIBaseViewController<PhotosViewModel> {
     
     private func setupViews(){
         view.backgroundColor = .white
-        view.addSubview(collectionView)
+        view.addSubviews(contentOf: [searchView, collectionView])
         collectionView.register(UIPhotoCell.self)
         setupConstraints()
     }
     
     private func setupConstraints(){
+        searchView.snp.makeConstraints{ maker in
+            maker.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            maker.leading.equalToSuperview().offset(10)
+            maker.trailing.equalToSuperview().offset(-10)
+            maker.height.equalTo(50)
+        }
         collectionView.snp.makeConstraints{ maker in
-            maker.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            maker.top.equalTo(searchView.snp.bottom).offset(10)
             maker.leading.equalToSuperview().offset(10)
             maker.bottom.trailing.equalToSuperview().offset(-10)
         }
     }
     
     func bindingCollectionViewDataSource(){
+         viewModel.photos
+        .filter{$0.count > 0}
+        .subscribe(onNext: {[weak self] items in
+           self?.collectionViewLayout.invalidateLayout()
+        }).disposed(by: disposeBag)
+        
         viewModel.photos
         .bind(to: collectionView.rx.items){(collection, index , model) in
             let target = IndexPath(row: index, section: 0)

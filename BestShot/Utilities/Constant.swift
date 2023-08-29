@@ -22,3 +22,8 @@ enum ErrorMessages{
     static let  anInternal = "an internal error occured"
     static let  notFound = "the url you have requested is not exited"
 }
+
+enum Images {
+    static let clock = "clock"
+}
+
