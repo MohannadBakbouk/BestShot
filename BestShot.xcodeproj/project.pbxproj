@@ -16,6 +16,7 @@
 		0423579E2A9DD9370021972B /* BestShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423579D2A9DD9370021972B /* BestShotTests.swift */; };
 		042357A82A9DD9370021972B /* BestShotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042357A72A9DD9370021972B /* BestShotUITests.swift */; };
 		042357AA2A9DD9370021972B /* BestShotUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042357A92A9DD9370021972B /* BestShotUITestsLaunchTests.swift */; };
+		04F9279B2A9DDD3B00CC3F52 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F9279A2A9DDD3B00CC3F52 /* Constant.swift */; };
 		5273B898FC55748AB913F5E9 /* Pods_BestShot_BestShotUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A0162DA61D2632C9629DC7 /* Pods_BestShot_BestShotUITests.framework */; };
 		BBC173631E7EE91969B72841 /* Pods_BestShot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5F301D378261619B9B70F2 /* Pods_BestShot.framework */; };
 		C0F67B0AAFC5D9C6A8591E57 /* Pods_BestShotTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60381C769022DA38BF55FF11 /* Pods_BestShotTests.framework */; };
@@ -52,6 +53,7 @@
 		042357A32A9DD9370021972B /* BestShotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BestShotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		042357A72A9DD9370021972B /* BestShotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestShotUITests.swift; sourceTree = "<group>"; };
 		042357A92A9DD9370021972B /* BestShotUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestShotUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		04F9279A2A9DDD3B00CC3F52 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		20E87EA572F951839133863E /* Pods-BestShotTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BestShotTests.debug.xcconfig"; path = "Target Support Files/Pods-BestShotTests/Pods-BestShotTests.debug.xcconfig"; sourceTree = "<group>"; };
 		23A0162DA61D2632C9629DC7 /* Pods_BestShot_BestShotUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BestShot_BestShotUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C5F301D378261619B9B70F2 /* Pods_BestShot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BestShot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,13 +118,9 @@
 		042357852A9DD9360021972B /* BestShot */ = {
 			isa = PBXGroup;
 			children = (
-				042357862A9DD9360021972B /* AppDelegate.swift */,
-				042357882A9DD9360021972B /* SceneDelegate.swift */,
-				0423578A2A9DD9360021972B /* ViewController.swift */,
-				0423578C2A9DD9360021972B /* Main.storyboard */,
-				0423578F2A9DD9370021972B /* Assets.xcassets */,
-				042357912A9DD9370021972B /* LaunchScreen.storyboard */,
-				042357942A9DD9370021972B /* Info.plist */,
+				04F927942A9DDBAE00CC3F52 /* Screens */,
+				04F927952A9DDBFD00CC3F52 /* Utilities */,
+				04F927962A9DDC0B00CC3F52 /* Resources */,
 			);
 			path = BestShot;
 			sourceTree = "<group>";
@@ -144,6 +142,59 @@
 			path = BestShotUITests;
 			sourceTree = "<group>";
 		};
+		04F927942A9DDBAE00CC3F52 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				04F927982A9DDC7800CC3F52 /* Photos */,
+				04F927972A9DDC6900CC3F52 /* Splash */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		04F927952A9DDBFD00CC3F52 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				04F927992A9DDCAA00CC3F52 /* Coordinator */,
+				042357862A9DD9360021972B /* AppDelegate.swift */,
+				042357882A9DD9360021972B /* SceneDelegate.swift */,
+				04F9279A2A9DDD3B00CC3F52 /* Constant.swift */,
+				042357942A9DD9370021972B /* Info.plist */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		04F927962A9DDC0B00CC3F52 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0423578F2A9DD9370021972B /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		04F927972A9DDC6900CC3F52 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				042357912A9DD9370021972B /* LaunchScreen.storyboard */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		04F927982A9DDC7800CC3F52 /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+				0423578C2A9DD9360021972B /* Main.storyboard */,
+				0423578A2A9DD9360021972B /* ViewController.swift */,
+			);
+			path = Photos;
+			sourceTree = "<group>";
+		};
+		04F927992A9DDCAA00CC3F52 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
 		62C0E991A696759C9D5997CF /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,7 +205,6 @@
 				20E87EA572F951839133863E /* Pods-BestShotTests.debug.xcconfig */,
 				63E41F365A193FB0FB41F4C9 /* Pods-BestShotTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -410,6 +460,7 @@
 				0423578B2A9DD9360021972B /* ViewController.swift in Sources */,
 				042357872A9DD9360021972B /* AppDelegate.swift in Sources */,
 				042357892A9DD9360021972B /* SceneDelegate.swift in Sources */,
+				04F9279B2A9DDD3B00CC3F52 /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,7 +639,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BestShot/Info.plist;
+				INFOPLIST_FILE = BestShot/Utilities/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -616,7 +667,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BestShot/Info.plist;
+				INFOPLIST_FILE = BestShot/Utilities/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
