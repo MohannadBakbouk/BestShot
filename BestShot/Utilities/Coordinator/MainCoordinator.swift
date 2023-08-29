@@ -24,7 +24,7 @@ final class MainCoordinator: Coordinator{
     }
     
     func showPhotos(){
-        let viewModel = PhotosViewModel()
+        let viewModel = PhotosViewModel(service: PhotoService())
         let photosScreen = UIPhotosController(viewModel: viewModel, coordinator: self)
         pushViewControllerToStack(with:photosScreen, animated: false, isRoot: true)
     }

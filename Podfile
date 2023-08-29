@@ -9,6 +9,7 @@ target 'BestShot' do
    pod 'RxSwift', '6.5.0'
    pod 'RxCocoa', '6.5.0'
    pod 'SnapKit', '5.6.0'
+  pod 'Kingfisher', '7.8.1'
 
   target 'BestShotTests' do
     inherit! :search_paths
