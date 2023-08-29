@@ -38,6 +38,7 @@ final class UIPhotosController: UIBaseViewController<PhotosViewModel> {
         viewModel.searchPhotos()
         bindingCollectionViewDataSource()
         bindingToSearchQuery()
+        bindingCollectionViewScrollingEvent()
     }
     
     private func setupViews(){
@@ -81,6 +82,12 @@ final class UIPhotosController: UIBaseViewController<PhotosViewModel> {
         searchView.searchQuery
        .bind(to: viewModel.searchQuery)
        .disposed(by: disposeBag)
+    }
+    
+    func bindingCollectionViewScrollingEvent(){
+         collectionView.rx.reachedBottom
+        .bind(to: viewModel.reachedBottomTrigger)
+        .disposed(by: disposeBag)
     }
 }
 

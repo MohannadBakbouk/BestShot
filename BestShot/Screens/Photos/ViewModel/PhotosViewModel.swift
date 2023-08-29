@@ -15,8 +15,12 @@ final class PhotosViewModel: PhotosViewModelProtocol{
     var isLoading: PublishSubject<Bool>
     var error: BehaviorSubject<ErrorDataView?>
     var photos: BehaviorRelay<[PhotoViewData]>
-    var fetchedPhotos: BehaviorRelay<[Photo]>
+    //Inputs events
     var searchQuery: PublishSubject<String?>
+    var reachedBottomTrigger: PublishSubject<Void>
+    //Internal events
+    var fetchedPhotos: BehaviorRelay<[Photo]>
+    var isLoadingMore: BehaviorRelay<Bool>
     let disposeBag: DisposeBag
     
     init(service: PhotoServiceProtocol) {
@@ -28,8 +32,11 @@ final class PhotosViewModel: PhotosViewModelProtocol{
         self.photos = BehaviorRelay(value: [])
         self.fetchedPhotos = BehaviorRelay(value: [])
         self.searchQuery = PublishSubject()
+        self.reachedBottomTrigger = PublishSubject()
+        self.isLoadingMore = BehaviorRelay(value: false)
         subscribingToFetchedPhotos()
         subscribingToSearchQuery()
+        subscribingToReachedBottomTrigger()
     }
 
     func searchPhotos(){
@@ -40,6 +47,7 @@ final class PhotosViewModel: PhotosViewModelProtocol{
             self?.searchParams.pages = event.results?.pages ?? 0
         }, onError : {[weak self] error in
            print(error)
+            self?.isLoadingMore.accept(false)
         }).disposed(by: disposeBag)
     }
     
@@ -56,6 +64,7 @@ final class PhotosViewModel: PhotosViewModelProtocol{
             let newItems = self.fetchedPhotos.value.map{PhotoViewData(info: $0)}
             let emittedItems = self.searchParams.page > 1 ? (self.photos.value + newItems) : newItems
             self.photos.accept(emittedItems)
+            self.isLoadingMore.accept(false)
         }
     }
     
@@ -90,6 +99,20 @@ final class PhotosViewModel: PhotosViewModelProtocol{
         .compactMap{$0}
         .subscribe(onNext:{[weak self] text in
             self?.searchParams = SearchParams(query: text)
+            self?.searchPhotos()
+        }).disposed(by: disposeBag)
+    }
+    
+    private func subscribingToReachedBottomTrigger(){
+         reachedBottomTrigger
+        .filter{[weak self] in
+            self?.searchParams.canLoadMore ?? false
+         }
+        .withLatestFrom(isLoadingMore)
+        .filter{!$0}
+        .subscribe(onNext:{[weak self]_ in
+            self?.isLoadingMore.accept(true)
+            self?.searchParams.page += 1
             self?.searchPhotos()
         }).disposed(by: disposeBag)
     }
