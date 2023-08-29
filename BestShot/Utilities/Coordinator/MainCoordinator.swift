@@ -18,7 +18,14 @@ final class MainCoordinator: Coordinator{
     }
     
     func start() {
+        let splash = UISplashController()
+        splash.coordinator = self
+        pushViewControllerToStack(with: splash)
+    }
     
+    func showPhotos(){
+        pushViewControllerToStack(with:UIPhotosController(), animated: false, isRoot: true)
+        
     }
     
     func back() {

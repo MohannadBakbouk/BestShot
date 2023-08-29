@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  UIPhotosController.swift
 //  BestShot
 //
 //  Created by Mohannad on 29/08/2023.
@@ -7,13 +7,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class UIPhotosController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+        view.backgroundColor = .gray
     }
-
-
 }
-
