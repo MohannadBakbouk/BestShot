@@ -11,12 +11,13 @@
 		042357892A9DD9360021972B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042357882A9DD9360021972B /* SceneDelegate.swift */; };
 		042357902A9DD9370021972B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0423578F2A9DD9370021972B /* Assets.xcassets */; };
 		042357932A9DD9370021972B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 042357912A9DD9370021972B /* LaunchScreen.storyboard */; };
-		0423579E2A9DD9370021972B /* BestShotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423579D2A9DD9370021972B /* BestShotTests.swift */; };
+		0423579E2A9DD9370021972B /* MockedCacheManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423579D2A9DD9370021972B /* MockedCacheManagerTests.swift */; };
 		042357A82A9DD9370021972B /* BestShotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042357A72A9DD9370021972B /* BestShotUITests.swift */; };
 		042357AA2A9DD9370021972B /* BestShotUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042357A92A9DD9370021972B /* BestShotUITestsLaunchTests.swift */; };
 		04262A332A9F410400FF7420 /* Image1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 04262A322A9F410400FF7420 /* Image1.jpeg */; };
 		04262A352A9F41A400FF7420 /* ActualPhotoServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04262A342A9F41A400FF7420 /* ActualPhotoServiceTests.swift */; };
 		04262A382A9F536E00FF7420 /* MockedCasheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04262A372A9F536E00FF7420 /* MockedCasheManager.swift */; };
+		04262A3B2A9F7C4B00FF7420 /* ActaulCacheManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04262A3A2A9F7C4B00FF7420 /* ActaulCacheManagerTests.swift */; };
 		045CBE4D2A9F33D60099A19D /* PhotosPage2.json in Resources */ = {isa = PBXBuildFile; fileRef = 045CBE4C2A9F33D60099A19D /* PhotosPage2.json */; };
 		045CBE4F2A9F33F40099A19D /* PhotosPage3.json in Resources */ = {isa = PBXBuildFile; fileRef = 045CBE4E2A9F33F40099A19D /* PhotosPage3.json */; };
 		045CBE542A9F36AD0099A19D /* Image4.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 045CBE502A9F36AC0099A19D /* Image4.jpeg */; };
@@ -95,13 +96,14 @@
 		042357922A9DD9370021972B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		042357942A9DD9370021972B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		042357992A9DD9370021972B /* BestShotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BestShotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0423579D2A9DD9370021972B /* BestShotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestShotTests.swift; sourceTree = "<group>"; };
+		0423579D2A9DD9370021972B /* MockedCacheManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedCacheManagerTests.swift; sourceTree = "<group>"; };
 		042357A32A9DD9370021972B /* BestShotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BestShotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		042357A72A9DD9370021972B /* BestShotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestShotUITests.swift; sourceTree = "<group>"; };
 		042357A92A9DD9370021972B /* BestShotUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestShotUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		04262A322A9F410400FF7420 /* Image1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Image1.jpeg; sourceTree = "<group>"; };
 		04262A342A9F41A400FF7420 /* ActualPhotoServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualPhotoServiceTests.swift; sourceTree = "<group>"; };
 		04262A372A9F536E00FF7420 /* MockedCasheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedCasheManager.swift; sourceTree = "<group>"; };
+		04262A3A2A9F7C4B00FF7420 /* ActaulCacheManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActaulCacheManagerTests.swift; sourceTree = "<group>"; };
 		045CBE4C2A9F33D60099A19D /* PhotosPage2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PhotosPage2.json; sourceTree = "<group>"; };
 		045CBE4E2A9F33F40099A19D /* PhotosPage3.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PhotosPage3.json; sourceTree = "<group>"; };
 		045CBE502A9F36AC0099A19D /* Image4.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Image4.jpeg; sourceTree = "<group>"; };
@@ -226,10 +228,10 @@
 		0423579C2A9DD9370021972B /* BestShotTests */ = {
 			isa = PBXGroup;
 			children = (
+				04262A392A9F7C1800FF7420 /* CacheManager */,
 				045CBE582A9F3A400099A19D /* Services */,
-				04AF299A2A9F309C00FB2565 /* Resources */,
 				04AF29972A9F2EA700FB2565 /* Mocked */,
-				0423579D2A9DD9370021972B /* BestShotTests.swift */,
+				04AF299A2A9F309C00FB2565 /* Resources */,
 			);
 			path = BestShotTests;
 			sourceTree = "<group>";
@@ -241,6 +243,15 @@
 				042357A92A9DD9370021972B /* BestShotUITestsLaunchTests.swift */,
 			);
 			path = BestShotUITests;
+			sourceTree = "<group>";
+		};
+		04262A392A9F7C1800FF7420 /* CacheManager */ = {
+			isa = PBXGroup;
+			children = (
+				0423579D2A9DD9370021972B /* MockedCacheManagerTests.swift */,
+				04262A3A2A9F7C4B00FF7420 /* ActaulCacheManagerTests.swift */,
+			);
+			path = CacheManager;
 			sourceTree = "<group>";
 		};
 		045CBE582A9F3A400099A19D /* Services */ = {
@@ -836,7 +847,8 @@
 			files = (
 				04262A352A9F41A400FF7420 /* ActualPhotoServiceTests.swift in Sources */,
 				04AF29992A9F2EC300FB2565 /* MockedPhotoService.swift in Sources */,
-				0423579E2A9DD9370021972B /* BestShotTests.swift in Sources */,
+				04262A3B2A9F7C4B00FF7420 /* ActaulCacheManagerTests.swift in Sources */,
+				0423579E2A9DD9370021972B /* MockedCacheManagerTests.swift in Sources */,
 				04262A382A9F536E00FF7420 /* MockedCasheManager.swift in Sources */,
 				045CBE5A2A9F3A6A0099A19D /* MockedPhotoServiceTests.swift in Sources */,
 			);
