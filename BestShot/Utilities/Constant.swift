@@ -26,6 +26,7 @@ enum ErrorMessages{
 
 enum Images {
     static let clock = "clock"
+    static let exclamationmark = "exclamationmark.circle.fill"
 }
 
 enum DefaultSettings   {

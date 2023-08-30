@@ -48,14 +48,17 @@ final class PhotosViewModel: PhotosViewModelProtocol{
     }
 
     func searchPhotos(){
+        isLoading.onNext(true)
         service.searchPhotos(params: searchParams)
         .subscribe(onNext: {[weak self] event in
             guard let items = event.results?.items else {return}
             self?.fetchedPhotos.accept(items)
             self?.searchParams.pages = event.results?.pages ?? 0
         }, onError : {[weak self] error in
-           print(error)
+            let networkError = error as? NetworkError ?? .errorOccured
             self?.isLoadingMore.accept(false)
+            self?.isLoading.onNext(false)
+            self?.error.onNext(ErrorDataView(with: networkError))
         }).disposed(by: disposeBag)
     }
     
@@ -71,6 +74,7 @@ final class PhotosViewModel: PhotosViewModelProtocol{
             guard let self = self else {return}
             let newItems = self.fetchedPhotos.value.map{PhotoViewData(info: $0)}
             let emittedItems = self.searchParams.page > 1 ? (self.photos.value + newItems) : newItems
+            self.isLoading.onNext(false)
             self.photos.accept(emittedItems)
             self.isLoadingMore.accept(false)
         }
@@ -107,6 +111,7 @@ final class PhotosViewModel: PhotosViewModelProtocol{
         .compactMap{$0}
         .subscribe(onNext:{[weak self] text in
             self?.searchParams = SearchParams(query: text)
+            self?.photos.accept([])
             self?.searchPhotos()
             self?.cacheManager.add(info: QueryObject(text: text), entity: Query.self)
         }).disposed(by: disposeBag)

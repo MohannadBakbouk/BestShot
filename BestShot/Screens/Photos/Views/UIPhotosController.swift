@@ -32,16 +32,24 @@ final class UIPhotosController: UIBaseViewController<PhotosViewModel> {
         return layout
     }()
     
+    private let activityIndicatorView : UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.style = .large
+        indicator.color = .appColor
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        viewModel.searchPhotos()
         bindingViewModel()
+        viewModel.searchPhotos()
     }
     
     private func setupViews(){
         view.backgroundColor = .white
-        view.addSubviews(contentOf: [searchView, collectionView])
+        view.addSubviews(contentOf: [searchView, collectionView, activityIndicatorView])
         collectionView.register(UIPhotoCell.self)
         setupConstraints()
     }
@@ -58,6 +66,10 @@ final class UIPhotosController: UIBaseViewController<PhotosViewModel> {
             maker.leading.equalToSuperview().offset(10)
             maker.bottom.trailing.equalToSuperview().offset(-10)
         }
+        activityIndicatorView.snp.makeConstraints{ maker in
+            maker.size.equalTo(25)
+            maker.center.equalToSuperview()
+        }
     }
     
     private func bindingViewModel(){
@@ -67,12 +79,15 @@ final class UIPhotosController: UIBaseViewController<PhotosViewModel> {
         bindingCollectionViewScrollingEvent()
         bindingHistorySearchTrigger()
         bindingHistorySearchItemsToSearchView()
+        bindindLoadingIndicator()
+        bindingErrorMessage()
     }
     
     private func bindingPhotos(){
         viewModel.photos
         .filter{$0.count > 0}
         .subscribe(onNext: {[weak self] items in
+           self?.collectionView.clearMessage()
            self?.collectionViewLayout.invalidateLayout()
         }).disposed(by: disposeBag)
     }
@@ -109,6 +124,25 @@ final class UIPhotosController: UIBaseViewController<PhotosViewModel> {
         viewModel.historySearchItems
         .bind(to: searchView.items)
         .disposed(by: disposeBag)
+    }
+    
+    private func bindingErrorMessage(){
+        viewModel.error
+        .observe(on: MainScheduler.instance)
+        .compactMap{$0}
+        .subscribe(onNext: {[weak self] error in
+            self?.collectionView.setMessage(with: error)
+        }).disposed(by: disposeBag)
+    }
+    
+    func bindindLoadingIndicator()  {
+        viewModel.isLoading
+       .observe(on: MainScheduler.instance)
+       .subscribe(onNext:{[weak self] status in
+           guard !(self?.viewModel.isLoadingMore.value ?? false) else {return}
+           let indicator = self?.activityIndicatorView
+           _ = status ? indicator?.startAnimating() : indicator?.stopAnimating()
+       }).disposed(by: disposeBag)
     }
 }
 
