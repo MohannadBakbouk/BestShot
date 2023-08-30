@@ -14,6 +14,7 @@ enum NetworkError: Int,  Error {
     case parse
     case invalidUrl
     case internetOffline
+    case invalidHostname
     case errorOccured
     
     var message : String {
@@ -23,18 +24,23 @@ enum NetworkError: Int,  Error {
             case .errorOccured: return ErrorMessages.general
             case .parse: return ErrorMessages.parsing
             case .notFound : return ErrorMessages.notFound
+            case .invalidHostname: return ErrorMessages.hostNameNotFound
             default: return ErrorMessages.anInternal
         }
     }
     
     static func convert(_ error : Error?) -> NetworkError{
-        guard let mapped = error as? URLError else {return .errorOccured}
+        guard let mapped = error as? URLError else {
+            return .errorOccured
+            
+        }
         switch mapped.code {
           case .notConnectedToInternet : return .internetOffline
           case .timedOut: return .internetOffline
           case .cannotDecodeContentData: return .parse
           case .cannotDecodeRawData: return .parse
           case .appTransportSecurityRequiresSecureConnection: return .invalidUrl
+          case .cannotFindHost : return .invalidHostname
           default: return .errorOccured
         }
     }

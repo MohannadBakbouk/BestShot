@@ -22,6 +22,7 @@ enum ErrorMessages{
     static let  parsing = "an internal error occured while parsing the request please try again later"
     static let  anInternal = "an internal error occured"
     static let  notFound = "the url you have requested is not exited"
+    static let  hostNameNotFound =  "the host you have requested is not existed"
 }
 
 enum Images {

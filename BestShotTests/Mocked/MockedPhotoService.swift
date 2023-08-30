@@ -24,8 +24,8 @@ final class MockedPhotoService: PhotoServiceProtocol{
     func fetchImage(url: URL) -> Observable<Data> {
         let bundle = Bundle(for: MockedPhotoService.self)
         let id = Int.random(in: 1...5)
-        guard let url = bundle.url(forResource: "Image\(id)", withExtension: "jpg"),
-              let data =  try? Data(contentsOf: url) else {
+        guard let urlImage = bundle.url(forResource: "Image\(id)", withExtension: "jpeg"),
+              let data =  try? Data(contentsOf: urlImage) else {
             return Observable.error(NetworkError.notFound)
         }
         return Observable.just(data)
