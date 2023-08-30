@@ -16,5 +16,6 @@ protocol PhotosViewModelProtocol: BaseViewModelProtocol{
     var reachedBottomTrigger: PublishSubject<Void>{get}
     var loadHistorySearchTrigger: PublishSubject<Void>{get}
     var isLoadingMore: BehaviorRelay<Bool>{get}
+    var searchParams : SearchParams{get}
     func searchPhotos()
 }

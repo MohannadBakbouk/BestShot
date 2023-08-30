@@ -11,7 +11,7 @@ import RxCocoa
 final class PhotosViewModel: PhotosViewModelProtocol{
     private let service: PhotoServiceProtocol
     private let cacheManager: CacheManagerProtocol
-    private var searchParams : SearchParams
+    var searchParams : SearchParams
     //Output events
     var isLoading: PublishSubject<Bool>
     var error: BehaviorSubject<ErrorDataView?>
