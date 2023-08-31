@@ -37,6 +37,12 @@ final class ActaulCacheManagerTests: XCTestCase {
         XCTAssert((items?.count ?? 0) == queries.count , "Failed to fetch Queries")
     }
     
+    func testFetchAllMatchPredicate(){
+        _ = queries.map{cacheManager.add(info:$0, entity: Query.self)}
+        let items = cacheManager.fetchAll(entity: Query.self, query: "text =='Netherlands'")
+        XCTAssert(items?.count == 1 , "Failed to fetch Queries's count")
+    }
+    
     func testDeleteQuery() throws {
         cacheManager.add(info: queries.first!, entity: Query.self)
         let addedItem =  cacheManager.fetchAll(entity: Query.self)?.first
@@ -54,6 +60,16 @@ final class ActaulCacheManagerTests: XCTestCase {
         XCTAssert(newCount == 0, "Failed to delete all queries")
     }
     
+    func testDeleteAllMatchPredicate(){
+        let query = "text =='Austria'"
+        _ = queries.map{cacheManager.add(info:$0, entity: Query.self)}
+        var items = cacheManager.fetchAll(entity: Query.self, query: query)
+        XCTAssert(items?.count == 1, "Failed to add new queries")
+        (cacheManager as? CacheManager)?.deleteAllTestableItems(entity: Query.self, query: "text =='Austria'")
+        items = cacheManager.fetchAll(entity: Query.self, query: query)
+        XCTAssert(items?.count ==  0, "Failed to delete a specfic Query")
+    }
+    
     func testCountQueries(){
         _ = queries.map{cacheManager.add(info:$0, entity: Query.self)}
         let count = cacheManager.recordsCount(entity: Query.self)
@@ -68,6 +84,11 @@ extension CacheManager{
      but CacheManager confirms CacheManagerProtocol in an extension which can't be overrided as a result I did Introduce this method*/
     func deleteAllTestableItems<T>(entity: T.Type) where T : NSManagedObject {
         guard let items = fetchAll(entity: T.self) else { return}
+        items.forEach{delete(entity: $0)}
+    }
+    
+    func deleteAllTestableItems<T>(entity: T.Type, query: String?) where T : NSManagedObject {
+        guard let items = fetchAll(entity: T.self, query: query) else { return}
         items.forEach{delete(entity: $0)}
     }
 }

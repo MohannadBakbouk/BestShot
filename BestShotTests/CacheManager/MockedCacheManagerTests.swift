@@ -34,6 +34,12 @@ final class MockedCacheManagerTests: XCTestCase {
         let items = cacheManager.fetchAll(entity: Query.self)
         XCTAssert((items?.count ?? 0) == queries.count , "Failed to fetch Queries")
     }
+    
+    func testFetchAllMatchPredicate(){
+        _ = queries.map{cacheManager.add(info:$0, entity: Query.self)}
+        let items = cacheManager.fetchAll(entity: Query.self, query: "text =='Netherlands'")
+        XCTAssert(items?.count == 1 , "Failed to fetch Queries's count")
+    }
 
     func testDeleteQuery() throws {
         cacheManager.add(info: queries.first!, entity: Query.self)
@@ -50,6 +56,16 @@ final class MockedCacheManagerTests: XCTestCase {
         cacheManager.deleteAll(entity: Query.self)
         let newCount =  cacheManager.recordsCount(entity: Query.self)
         XCTAssert(newCount == 0, "Failed to delete all queries")
+    }
+    
+    func testDeleteAllMatchPredicate(){
+        let query = "text =='Austria'"
+        _ = queries.map{cacheManager.add(info:$0, entity: Query.self)}
+        var items = cacheManager.fetchAll(entity: Query.self, query: query)
+        XCTAssert(items?.count == 1, "Failed to add new queries")
+        cacheManager.deleteAll(entity: Query.self, query: "text =='Austria'")
+        items = cacheManager.fetchAll(entity: Query.self, query: query)
+        XCTAssert(items?.count ==  0, "Failed to delete a specfic Query")
     }
 
     func testCountQueries(){

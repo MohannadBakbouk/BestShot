@@ -29,7 +29,6 @@ class MockedCasheManager: CacheManagerProtocol{
         return container.newBackgroundContext()
     }()
     
-
     init() {
         self.dataStore = [:]
     }
@@ -45,8 +44,29 @@ class MockedCasheManager: CacheManagerProtocol{
         return dataStore[String(describing: entity)]?.values.compactMap{$0 as? T}
     }
     
+    func fetchAll<T>(entity: T.Type, query: String?) -> [T]? where T : NSManagedObject {
+        let items = dataStore[String(describing: entity)]?.values.compactMap{$0 as? T} ?? []
+        guard let predicate =  castQueryToPredicate(with: query) else {return items}
+        var result: [T] = []
+        items.forEach{ item in
+            guard let value = item.value(forKey: predicate.property) else {return}
+          _ =  String(describing: value) == predicate.value ? result.append(item) : ()
+        }
+        return result
+    }
+    
     func deleteAll<T: NSManagedObject>(entity: T.Type)  {
         dataStore[String(describing: entity)] = nil
+    }
+    
+    func deleteAll<T>(entity: T.Type, query: String?) where T : NSManagedObject {
+        let items = dataStore[String(describing: entity)]?.values.compactMap{$0 as? T} ?? []
+        guard let predicate =  castQueryToPredicate(with: query) else {return}
+        items.forEach{ item in
+            guard let value = item.value(forKey: predicate.property),
+                  String(describing: value) == predicate.value else {return}
+            dataStore[String(describing: T.self)]?[item.hashValue] = nil
+        }
     }
     
     func delete<T>(entity: T) where T : NSManagedObject {
@@ -62,3 +82,13 @@ class MockedCasheManager: CacheManagerProtocol{
     }    
 }
 
+typealias Predicate = (property: String, value: String)
+
+extension MockedCasheManager{
+    func castQueryToPredicate(with value: String?) -> Predicate?{
+        guard let parts = value?.split(separator: "=="), parts.count == 2 else {return nil}
+        let property = String(parts.first!.trimmingCharacters(in: .whitespaces))
+        let value = String(parts.last!.replacingOccurrences(of: "'", with: ""))
+        return Predicate(property, value)
+    }
+}
