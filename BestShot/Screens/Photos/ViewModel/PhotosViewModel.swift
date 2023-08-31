@@ -92,6 +92,7 @@ final class PhotosViewModel: PhotosViewModelProtocol{
                 semaphore.signal()
                 downloadGroup.leave()
             }, onError: { _ in
+                item.image = UIImage(named: Images.noImage)
                 semaphore.signal()
                 downloadGroup.leave()
             }).disposed(by: self.disposeBag)
