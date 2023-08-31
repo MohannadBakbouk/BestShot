@@ -93,26 +93,36 @@ extension CacheManager : CacheManagerProtocol {
          }
      }
      
-     func fetchAll<T>(entity: T.Type) -> [T]? where T : NSManagedObject {
+    func fetchAll<T>(entity: T.Type , query: String? = nil) -> [T]? where T : NSManagedObject {
          var results : [T]? = nil
          let entityName = String(describing: T.self)
          let request = NSFetchRequest<T>(entityName: entityName)
+         request.predicate = query != nil ? NSPredicate(format: query!) : nil
          request.sortDescriptors = []
          backgroundContext.performAndWait {
              results = try? request.execute()
          }
          return results
      }
-     
+    
+    func fetchAll<T>(entity: T.Type) -> [T]? where T : NSManagedObject {
+        return fetchAll(entity: entity, query: nil)
+    }
+    
+    func deleteAll<T>(entity: T.Type, query: String?) where T : NSManagedObject {
+        let entityName = String(describing: T.self)
+        let request  = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        request.predicate = query != nil ? NSPredicate(format: query!) : nil
+        request.sortDescriptors = []
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
+        _ = try? backgroundContext.execute(deleteRequest)
+    }
+
      func deleteAll<T>(entity: T.Type) where T : NSManagedObject {
-         let entityName = String(describing: T.self)
-         let request  = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-         request.sortDescriptors = []
-         let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
-         _ = try? backgroundContext.execute(deleteRequest)
+        deleteAll(entity: entity, query: nil)
      }
-     
-     func delete<T>(entity: T) where T : NSManagedObject {
+    
+      func delete<T>(entity: T) where T : NSManagedObject {
          backgroundContext.performAndWait {[weak self] in
              self?.backgroundContext.delete(entity)
              try? self?.backgroundContext.save()

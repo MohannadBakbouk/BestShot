@@ -108,11 +108,12 @@ final class PhotosViewModel: PhotosViewModelProtocol{
     
     private func subscribingToSearchQuery(){
         searchQuery
-        .compactMap{$0}
+        .compactMap{$0?.trimmingCharacters(in: .whitespaces)}
         .subscribe(onNext:{[weak self] text in
             self?.searchParams = SearchParams(query: text)
             self?.photos.accept([])
             self?.searchPhotos()
+            self?.cacheManager.deleteAll(entity: Query.self, query: String(format: "text == '%@'", text))
             self?.cacheManager.add(info: QueryObject(text: text), entity: Query.self)
         }).disposed(by: disposeBag)
     }
