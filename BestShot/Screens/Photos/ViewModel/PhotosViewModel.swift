@@ -29,7 +29,7 @@ final class PhotosViewModel: PhotosViewModelProtocol{
     init(service: PhotoServiceProtocol, cacheManager: CacheManagerProtocol) {
         self.service = service
         self.cacheManager = cacheManager
-        self.searchParams = SearchParams(query: "Netherlands")
+        self.searchParams = SearchParams(query: "Germany")
         self.disposeBag = DisposeBag()
         self.isLoading = PublishSubject()
         self.error = BehaviorSubject(value: nil)
