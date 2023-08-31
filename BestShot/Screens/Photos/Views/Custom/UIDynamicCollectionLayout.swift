@@ -35,9 +35,9 @@ final class UIDynamicCollectionLayout: UICollectionViewLayout {
   }
     
    override func invalidateLayout() {
-      super.invalidateLayout()
       cache.removeAll()
       contentHeight = 0
+      super.invalidateLayout()
    }
   
   override func prepare() {
@@ -45,10 +45,10 @@ final class UIDynamicCollectionLayout: UICollectionViewLayout {
       let columnWidth = contentWidth / CGFloat(numberOfColumns)
       var xOffset: [CGFloat] = []
       _ = (0..<numberOfColumns).map{xOffset.append(CGFloat($0) * columnWidth)}
-      var column = 0
       var yOffset: [CGFloat] = .init(repeating: 0, count: numberOfColumns)
       
     for item in 0..<collectionView.numberOfItems(inSection: 0) {
+      let column = yOffset.firstIndex(of: yOffset.min() ?? 0) ?? 0
       let indexPath = IndexPath(item: item, section: 0)
       let photoHeight = delegate?.collectionView( collectionView,
         heightForPhotoAtIndexPath: indexPath , cellWidth: columnWidth) ?? 180
@@ -61,7 +61,6 @@ final class UIDynamicCollectionLayout: UICollectionViewLayout {
       cache.append(attributes)
       contentHeight = max(contentHeight, frame.maxY)
       yOffset[column] = yOffset[column] + height
-      column = column < (numberOfColumns - 1) ? (column + 1) : 0
     }
   }
   
