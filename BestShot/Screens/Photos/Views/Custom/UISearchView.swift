@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 import SnapKit
 
+/* I did define UISearchViewProtocol, enabling me to replace the UISearchView easily with any other view, who confirms this as well as inherits of UIView */
 protocol UISearchViewProtocol: UIView{
     var searchQuery: PublishSubject<String?>{get}
     var loadHistorySearchTrigger: PublishSubject<Void>{get}
@@ -110,7 +111,6 @@ final class UISearchView: UIView, UISearchViewProtocol {
     }
     
     private func showHistoryTableview(){
-       
         superview?.addSubview(tableView)
         tableView.separatorStyle = .none
         let height = min((5 * historyItemHeight), (CGFloat(items.value.count) * historyItemHeight))

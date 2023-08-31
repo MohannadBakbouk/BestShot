@@ -61,7 +61,7 @@ final class PhotosViewModel: PhotosViewModelProtocol{
             self?.error.onNext(ErrorDataView(with: networkError))
         }).disposed(by: disposeBag)
     }
-    
+    /* By knowing the dimensions of the image, I'll be able to determine the dynamic cell's height. Consequently, I need to fetch those images, so I've used a semaphore to ensure that only five photos are being downloaded at a time */
     private func processFetchedPhotos(){
         let group =  DispatchGroup()
         let semaphore = DispatchSemaphore(value: 5)

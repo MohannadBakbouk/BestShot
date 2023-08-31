@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 
+/* Defining a generic protocol based on NSManagedObject, Enabling me to perform operations on any entity of the CoreData */
 protocol CacheManagerProtocol {
     func add<T:NSManagedObject , S: AnyObject> (info : S , entity : T.Type)
     func fetchAll<T:NSManagedObject>(entity : T.Type) -> [T]?

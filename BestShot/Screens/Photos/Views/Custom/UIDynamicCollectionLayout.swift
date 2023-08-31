@@ -12,6 +12,11 @@ protocol UIDynamicCollectionLayoutDelegate: AnyObject {
   func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath , cellWidth : CGFloat ) -> CGFloat
 }
 
+/*It is an approach to make the cell's height dynamic, I published an article two years ago about it.
+  Feel free to check it out the links
+  https://medium.com/swift2go/implementing-a-dynamic-height-uicollectionviewcell-in-swift-5-bdd912acd5c8
+  https://github.com/MohannadBakbouk/DynamicCell */
+
 final class UIDynamicCollectionLayout: UICollectionViewLayout {
   private let numberOfColumns = 2
   private let cellPadding: CGFloat = 6

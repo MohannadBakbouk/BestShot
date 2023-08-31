@@ -25,7 +25,7 @@ final class UIPhotosController: UIBaseViewController<PhotosViewModel> {
         collection.accessibilityIdentifier = "PhotosCollection"
         return collection
     }()
-    
+    /* In the beginning, I used the typical UICollectionViewLayout but the photos weren't displayed properly as a result, switched to using DynamicCollectionLayout */
     private lazy var collectionViewLayout : UIDynamicCollectionLayout = {
         let layout = UIDynamicCollectionLayout()
         layout.delegate = self
