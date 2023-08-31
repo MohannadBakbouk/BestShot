@@ -45,6 +45,7 @@ final class UISearchView: UIView, UISearchViewProtocol {
         table.tableFooterView = UIView()
         table.bounces = false
         table.alwaysBounceVertical = false
+        table.accessibilityIdentifier = "HistoryTermsTable"
         return table
     }()
     
