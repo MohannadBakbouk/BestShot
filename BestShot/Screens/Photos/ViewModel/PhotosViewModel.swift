@@ -135,7 +135,8 @@ final class PhotosViewModel: PhotosViewModelProtocol{
     private func subscribingToHistorySearchTrigger(){
         loadHistorySearchTrigger
         .subscribe(onNext:{[weak self]_ in
-            guard let items = self?.cacheManager.fetchAll(entity: Query.self) else {return}
+            guard var items = self?.cacheManager.fetchAll(entity: Query.self) else {return}
+            items.sort(by: {($0.date ?? Date()) > ($1.date ?? Date())})
             self?.historySearchItems.accept(items.compactMap{$0.text})
         }).disposed(by: disposeBag)
     }
