@@ -13,7 +13,7 @@ struct SearchParams {
     var query : String?
     var pages: Int
     
-    init(query : String? = nil , page : Int = 1 , size : Int = 25, pages: Int = 0) {
+    init(query : String? = nil , page : Int = 1 , size : Int = 20, pages: Int = 0) {
         self.query = query
         self.page = page
         self.size = size
