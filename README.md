@@ -1,6 +1,6 @@
 
 # Overview
-It's an app that displays a collection of images within CollectionView, I have managed to satisfy all the requirements that were mentioned in the document 
+It's an app that displays a collection of images within CollectionView.
 
 # Technologies Stack
 - [x] **Swift 5.8**
@@ -35,6 +35,3 @@ I made the cells' size based on image height, integrating the **UIDynamicCollect
 * XCode 14.3 (14E222b) or above
 * Swift 5.8
 * CocoaPods
-
-### Build Notes
-If there is any issue with the pods installation, try to remove the first line of the podfile.
